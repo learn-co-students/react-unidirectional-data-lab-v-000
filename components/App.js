@@ -9,11 +9,19 @@ const fileStore = require('../stores/fileStore');
 const actions = require('../actions');
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.listener = this.listener.bind(this)
+    this.state = {
+      files: fileStore.getState(),
+      selectedFileIndex: 0
+    }
+  }
   componentDidMount() {
-    // TODO
+    this.removeListener = fileStore.addListener(this.listener)
   }
   componentWillUnmount() {
-    // TODO
+    this.removeListener()
   }
   handleChange(ev) {
     const { selectedFileIndex } = this.state;
@@ -24,11 +32,14 @@ class App extends React.Component {
   }
   handleAdd(ev) {
     ev.preventDefault();
-    // TODO Dispatch action
+    actions.addFile()
   }
   handleRemove(ev) {
     ev.preventDefault()
-    // TODO Dispatch action
+    actions.removeFile()
+  }
+  listener(files) {
+    this.setState({ files })
   }
   render() {
     const { files, selectedFileIndex } = this.state;
