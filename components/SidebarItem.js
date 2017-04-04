@@ -9,9 +9,12 @@ class SidebarItem extends React.Component {
     return file.split('\n').find(line => line.length);
   }
   render() {
+    const { isSelected, onClick } = this.props;
+    const file = this.props.file || "";
     return (
-      <li>
-        <a>
+      <li className={isSelected ? "sidebar__item--selected" : "sidebar__item"}>
+        <a className="sidebar__link" onClick={onClick} >
+          { this.constructor.getTitle(file) || <em>Untitled</em> }
         </a>
       </li>
     );
