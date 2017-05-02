@@ -4,16 +4,22 @@ import React from 'react';
 import classNames from 'classnames';
 
 export default class SidebarItem extends React.Component {
-  static getTitle (file) {
-    // Find first non-empty line and use as title.
+
+  getTitle(file) {
+    if (!file) {
+      return null;  
+    }
     return file.split('\n').find(line => line.length);
   }
-  render() {
+
+  render() { 
+    const { file, onClick, isSelected } = this.props; 
     return (
-      <li>
-        <a>
+      <li className={ isSelected ? "sidebar__item--selected" : "sidebar__item"} >
+        <a className="sidebar__link" onClick={onClick} >
+          { this.getTitle(file) || <em>Untitled</em>}
         </a>
       </li>
-    );
+    ) 
   }
 }
