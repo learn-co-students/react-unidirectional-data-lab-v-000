@@ -9,9 +9,11 @@ export default class SidebarItem extends React.Component {
     return file.split('\n').find(line => line.length);
   }
   render() {
+    const file = this.props.file || ''
     return (
-      <li>
-        <a>
+      <li className={this.props.isSelected ? "sidebar__item--selected" : "sidebar__item"}>
+        <a className={"sidebar__link"} onClick={this.props.onClick} href="#" >
+          {SidebarItem.getTitle(file) || <em>Untitled</em>}
         </a>
       </li>
     );
