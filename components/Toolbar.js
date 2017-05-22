@@ -2,9 +2,13 @@
 
 import React from 'react';
 
-const Toolbar = () => (
-  <nav>
-    <button>+ Add note</button>
-    <button>Delete note</button>
-  </nav>
-);
+export default class Toolbar extends React.Component {
+  render() {
+    return(
+      <nav>
+        <button onClick={this.props.onAdd}>+ Add note</button>
+        <button onClick={this.props.onRemove}>Delete note</button>
+      </nav>
+    );
+  }
+}
