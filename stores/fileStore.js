@@ -4,7 +4,7 @@ import Store from './Store';
 
 class FileStore extends Store {
   updateFile(index, content){
-    var newState = this.state;
+    var newState = this.getState();
     newState.splice(index, 1, content);
     this.setState(newState);
   }
@@ -17,7 +17,7 @@ class FileStore extends Store {
 
   removeFile(index){
     if (this.state.length === 1) {
-      this.setState([""])
+      return this.setState([""])
     } else {
       var newState = this.getState();
       newState.splice(index, 1);

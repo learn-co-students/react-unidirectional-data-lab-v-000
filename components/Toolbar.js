@@ -8,12 +8,12 @@ export default class Toolbar extends React.Component {
   }
 
   render(){
-    const { addHandler, removeHandler } = this.props;
+    const { onAdd, onRemove } = this.props;
 
     return(
       <nav>
-        <button onClick={addHandler}>+ Add note</button>
-        <button onClick={removeHandler}>Delete note</button>
+        <button onClick={onAdd}>+ Add note</button>
+        <button onClick={onRemove}>Delete note</button>
       </nav>
     )
   }

@@ -13,8 +13,16 @@ export default class FileView extends React.Component {
 
     return (
       <div className="file-view">
-        <Toolbar onAdd={onAdd} onRemove={onRemove} />
-        <textarea className="file-view__text" value={file} onChange={onChange} />
+        <Toolbar
+          onAdd={onAdd}
+          onRemove={onRemove}
+        />
+        <textarea
+          placeholder="type some text here"
+          className="file-view__text"
+          value={file}
+          onChange={onChange}
+        />
       </div>
     );
   }

@@ -15,18 +15,14 @@ export default class App extends React.Component {
       files: fileStore.getState(),
       selectedFileIndex: 0
     });
-    this.listener = this.listener.bind(this);
-    this.handleAdd = actions.addFile.bind(this);
-    this.handleChange = actions.updateFile.bind(this, this.state.selectedFileIndex);
-    this.handleRemove = actions.removeFile.bind(this, this.state.selectedFileIndex);
-  }
-
-  listener(data) {
-    this.setState({files: data});
+    this.handleChange = this.handleChange.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   componentDidMount() {
-    this.removeListener = fileStore.addListener(this.listener);
+    this.removeListener = fileStore.addListener((data) => this.setState({files: data}));
     this.setState({files: fileStore.getState()});
   }
 
@@ -36,11 +32,10 @@ export default class App extends React.Component {
 
   handleChange(ev) {
     const { selectedFileIndex } = this.state;
-    this.handleChange(selectedFileIndex, ev.target.value);
+    actions.updateFile(selectedFileIndex, ev.target.value);
   }
 
   handleSelect(selectedFileIndex) {
-    // TODO Update selectedFileIndex state
     this.setState({
       selectedFileIndex: selectedFileIndex
     })
@@ -48,14 +43,14 @@ export default class App extends React.Component {
 
   handleAdd(ev) {
     ev.preventDefault();
-    // TODO Dispatch action
-    this.handleAdd();
+    actions.addFile();
   }
 
   handleRemove(ev) {
-    ev.preventDefault()
-    // TODO Dispatch action
-    this.handleRemove();
+    ev.preventDefault();
+    var currentIndex = this.state.selectedFileIndex;
+    actions.removeFile(currentIndex);
+    this.setState({selectedFileIndex: 0})
   }
 
   render() {
