@@ -48,7 +48,7 @@ describe('fileStore', function() {
       instance.updateFile(1, 'mars');
       const nextState = instance.getState();
 
-      expect(nextState).toNotBe(prevState);
+      expect(nextState).toNotBe(['hello', 'world']);
     });
   });
 
@@ -64,7 +64,7 @@ describe('fileStore', function() {
       const instance = new FileStore([]);
       const prevState = instance.getState();
       instance.addFile();
-      expect(instance.getState()).toNotBe(prevState);
+      expect(instance.getState()).toNotBe([]);
     });
   });
 
